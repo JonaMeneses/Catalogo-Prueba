@@ -1,0 +1,153 @@
+create database Catalogo
+
+use catalogo
+
+create table clientes(
+_id int not null primary key,
+razon_social varchar(50) not null,
+nombre_comercial varchar(50) not null,
+RFC varchar(13) not null,
+CURP varchar(18) not null,
+direccion varchar(50) not null
+)
+
+create table Contactos(
+_id int not null primary key,
+Nombre varchar(50) not null,
+Apellido_paterno varchar(50) not null,
+Apellido_materno varchar(50) not null,
+Telefono varchar(12) not null,
+id_cliente int not null,
+constraint fk_Cliente foreign key (id_cliente) references 
+Clientes (_id)
+)
+
+
+create procedure Listar_Clientes
+as
+select*from clientes
+go
+
+create procedure Buscar_cliente
+@razon varchar(50),
+@rfc varchar(13)
+as select *from clientes where razon_social like @razon + '%' and rfc like @rfc + '%'
+go
+
+create procedure Insertar_cliente
+@id int,
+@razon varchar(50),
+@nombre varchar(50),
+@rfc varchar(13),
+@curp varchar(18),
+@direccion varchar(50)
+as
+
+if not exists(select*from clientes where _id=@id)
+begin 
+
+insert into clientes(_id,razon_social,nombre_comercial,RFC,CURP,direccion) values
+(@id,@razon,@nombre,@rfc,@curp,@direccion)
+end
+go
+
+create procedure Actualizar_cliente
+@id int,
+@razon varchar(50),
+@nombre varchar(50),
+@rfc varchar(13),
+@curp varchar(18),
+@direccion varchar(50)
+as
+
+if exists(select*from clientes where _id=@id)
+begin
+
+
+update clientes set razon_social=@razon,nombre_comercial=@nombre,
+RFC=@rfc,CURP=@curp,direccion=@direccion where _id=@id
+end 
+go
+
+create procedure Eliminar_cliente
+@id int
+as
+if exists(select*from clientes where _id=@id)
+begin
+delete clientes where _id=@id
+end
+go
+
+create procedure Buscar_cliente_id
+@id int
+as
+select*from clientes where _id=@id
+go
+
+----------------------------------------Almacenados de Contactos------------------------------------------------------------
+
+create procedure Listar_Contactos
+as
+select*from contactos 
+go
+
+create procedure Listar_Contactos_idcliente
+@id int
+as
+select*from contactos where id_cliente=@id
+go
+
+create procedure Insertar_contacto
+@id int,
+@nombre varchar(50),
+@paterno varchar(50),
+@materno varchar(50),
+@telefono varchar(12),
+@id_cliente int
+as
+
+if not exists(select*from contactos where _id=@id)
+begin 
+
+insert into contactos(_id,Nombre,Apellido_paterno,Apellido_materno,Telefono,id_cliente) values
+(@id,@nombre,@paterno,@materno,@telefono,@id_cliente)
+end
+go
+
+create procedure Actualizar_contacto
+@id int,
+@nombre varchar(50),
+@paterno varchar(50),
+@materno varchar(50),
+@telefono varchar(12),
+@id_cliente int
+as
+
+if exists(select*from contactos where _id=@id)
+begin
+
+update contactos set nombre=@nombre,Apellido_paterno=@paterno,
+Apellido_materno= @materno,Telefono=@telefono  where _id=@id
+end 
+go
+
+create procedure Buscar_contacto_id
+@id int
+as
+select*from Contactos where _id=@id
+go
+
+create procedure Eliminar_contacto
+@id int
+as
+if exists(select*from contactos where _id=@id)
+begin
+delete Contactos where _id=@id
+end
+go
+
+create procedure Buscar_contacto
+@nombre varchar(50),
+@apellido varchar(13)
+as select *from Contactos where nombre like @nombre+ '%' and Apellido_paterno like @apellido + '%'
+go
