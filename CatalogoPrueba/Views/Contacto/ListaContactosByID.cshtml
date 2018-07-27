@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CatalogoPrueba.Models.ContactoModel>
+
+@{
+    // ViewBag.Title = "ListaContactosByID";
+    Layout = null;
+}
+
+<h2>Contactos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo contacto", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model._id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido_paterno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido_materno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item._id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido_paterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido_materno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Editar" , "Edit", new { id=item._id }) 
+            @Html.ActionLink("Eliminar", "Delete", new { id=item._id})
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<CatalogoPrueba.Models.ContactoModel>
+
+@{
+    ViewBag.Title = "Lista de Contactos";
+}
+
+<h2>Lista de Contactos</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create")
+</p>
+
+@using (Html.BeginForm("ListaContactos", "Contacto", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <span class="input-group-btn">
+
+
+                    <input class="btn btn-default" name="" type="submit" value="Buscar">
+
+                </span>
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" maxlength="50" id="nombre" />
+                <div hidden>
+                    @Html.TextArea("txtnombre", ViewBag.nombre as string)
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+@using (Html.BeginForm("ListaContactos", "Contacto", FormMethod.Get))
+{
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <span class="input-group-btn">
+
+                    <input class="btn btn-default" name="" type="submit" value="Buscar">
+
+                </span>
+                <input name="apellido" type="text" class="RFC form-control" placeholder="Apellido" maxlength="50" id="RFC">
+                <div hidden>
+                    @Html.TextArea("txtapellido", ViewBag.apellido as string)
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model._id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido_paterno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido_materno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_cliente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item._id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido_paterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido_materno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_cliente)
+        </td>
+        <td>
+          @Html.ActionLink("Editar", "Edit", new { id = item._id })
+        @Html.ActionLink("Eliminar", "Delete", new { id = item._id })
+        </td>
+    </tr>
+}
+
+</table>
+
