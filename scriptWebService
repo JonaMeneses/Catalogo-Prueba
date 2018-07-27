@@ -1,0 +1,13 @@
+Clientes
+
+Server/api/ClienteRest/
+post {"_id": 5,"Razon_social":"razon social","Nombre_comercial":"nombre","RFC":"rfc_ejemplo","CURP":"CURP_ejemplo_edita","direccion":"direccion_ejemplo"}
+Server/api/ClienteRest/5
+put {"_id": 5,"Razon_social":"razon social","Nombre_comercial":"nombre","RFC":"rfc_ejemplo","CURP":"CURP_ejemplo_edita","direccion":"direccion_ejemplo"}
+
+Contactos
+
+Server/api/ContactoRest/
+post{"_id": 5,"Nombre": "jona","Apellido_paterno": "meneses","Apellido_materno": "marquez","Telefono": "28812546","id_cliente": 1}
+Server/api/ContactoRest/3
+put {"_id": 3,"Nombre": "jona","Apellido_paterno": "meneses","Apellido_materno": "marquez","Telefono": "28812546","id_cliente": 1}
