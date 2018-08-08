@@ -33,6 +33,11 @@ namespace CatalogoPrueba.Controllers
             
             
         }
+
+        public void PruebaGIT()
+        {
+
+        }
        
         // GET: Cliente/Create
         public ActionResult Create()
